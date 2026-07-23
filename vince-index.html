@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vince Francis B. Quita — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --bg-elev:#131316;
+    --bg-elev-2:#1a1a1e;
+    --border:#242429;
+    --text:#ececec;
+    --text-dim:#8c8c94;
+    --text-faint:#5a5a61;
+    --accent:#e8b04b;
+    --accent-2:#5eb8ff;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --display: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.6; overflow-x:hidden;}
+  body::before{
+    content:""; position:fixed; inset:0;
+    background-image:linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px; opacity:.15; pointer-events:none; z-index:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  section{position:relative; z-index:1; padding:120px 8vw; max-width:1200px; margin:0 auto;}
+  .eyebrow{font-family:var(--mono); font-size:.8rem; color:var(--accent); letter-spacing:.02em; margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:"//"; color:var(--text-faint);}
+  h1,h2,h3,h4{font-family:var(--display); font-weight:600; letter-spacing:-.01em;}
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 8vw; background:rgba(10,10,12,.75); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:var(--mono); font-weight:500; font-size:1.05rem; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent);}
+  nav ul{list-style:none; display:flex; gap:32px;}
+  nav a{font-family:var(--mono); font-size:.85rem; color:var(--text-dim); transition:color .2s; position:relative;}
+  nav a:hover{color:var(--text);}
+  nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px; background:var(--accent); transition:width .25s;}
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:110;}
+  .nav-toggle span{width:24px; height:2px; background:var(--text);}
+
+  .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:140px;}
+  .hero-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:60px; align-items:center;}
+  .hero-tag{font-family:var(--mono); font-size:.85rem; color:var(--text-dim); letter-spacing:.03em; margin-bottom:22px; text-transform:uppercase;}
+  .hero h1{font-size:clamp(2.2rem, 4.4vw, 3.4rem); line-height:1.15; color:var(--text);}
+  .hero h1 .cursor{display:inline-block; width:.5em; height:1em; background:var(--accent); animation:blink 1s steps(2) infinite; vertical-align:-.12em; margin-left:4px;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero .quote{
+    margin-top:26px; font-family:var(--mono); font-size:.95rem; color:var(--accent-2);
+    border-left:2px solid var(--accent-2); padding-left:16px;
+  }
+  .hero p.lede{margin-top:22px; max-width:560px; color:var(--text-dim); font-size:1.05rem;}
+  .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+  .btn{font-family:var(--mono); font-size:.85rem; padding:14px 26px; border-radius:4px; transition:all .2s; border:1px solid transparent; cursor:pointer;}
+  .btn-primary{background:var(--accent); color:#0a0a0c; font-weight:500;}
+  .btn-primary:hover{background:#f2c46a; transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  .hero-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+  .hero-card .titlebar{display:flex; gap:6px; padding:12px 14px; border-bottom:1px solid var(--border);}
+  .titlebar span{width:10px; height:10px; border-radius:50%;}
+  .titlebar span:nth-child(1){background:#ff5f57;}
+  .titlebar span:nth-child(2){background:#febc2e;}
+  .titlebar span:nth-child(3){background:#28c840;}
+  .hero-card .card-body{padding:22px; font-family:var(--mono); font-size:.82rem; color:var(--text-dim);}
+  .hero-card .card-body strong{color:var(--text); display:block; font-family:var(--display); font-size:1.1rem; margin-bottom:10px;}
+  .hero-card .card-body .row{margin-bottom:10px; display:flex; gap:8px;}
+  .hero-card .card-body .row .k{color:var(--text-faint); min-width:70px;}
+
+  .sec-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; gap:24px; flex-wrap:wrap;}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem);}
+  .sec-head p{color:var(--text-dim); max-width:420px; font-size:.95rem;}
+
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+  .about-grid p{color:var(--text-dim); margin-bottom:18px;}
+  .value-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:8px; padding:22px; border-left:2px solid var(--accent); margin-bottom:16px;}
+  .value-card h4{font-size:1rem; margin-bottom:6px;}
+  .value-card p{color:var(--text-dim); font-size:.9rem; margin:0;}
+
+  .year-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px;}
+  .year-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; padding:26px; transition:border-color .2s;}
+  .year-card:hover{border-color:var(--accent-2);}
+  .year-card .yr-tag{font-family:var(--mono); font-size:.75rem; color:var(--accent); margin-bottom:10px;}
+  .year-card h4{font-size:1.05rem; margin-bottom:10px;}
+  .year-card p{color:var(--text-faint); font-size:.85rem; font-family:var(--mono);}
+
+  .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+  .contact-info{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; padding:32px;}
+  .ci-row{margin-bottom:22px;}
+  .ci-row .k{font-family:var(--mono); font-size:.72rem; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}
+  .ci-row .v{font-size:.95rem;}
+  .social-row{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap;}
+  .social-row a{font-family:var(--mono); font-size:.78rem; border:1px solid var(--border); padding:10px 16px; border-radius:6px; transition:.2s;}
+  .social-row a:hover{border-color:var(--accent-2); color:var(--accent-2);}
+  .quote-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; padding:32px; display:flex; align-items:center;}
+  .quote-card p{font-family:var(--display); font-size:1.3rem; color:var(--text); line-height:1.5;}
+  .quote-card p::before{content:"“"; color:var(--accent);}
+  .quote-card p::after{content:"”"; color:var(--accent);}
+
+  footer{text-align:center; padding:40px 8vw; border-top:1px solid var(--border); font-family:var(--mono); font-size:.78rem; color:var(--text-faint); position:relative; z-index:1;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media(max-width:860px){
+    nav ul{
+      position:fixed; top:0; right:0; height:100vh; width:70vw; background:var(--bg-elev);
+      flex-direction:column; justify-content:center; align-items:flex-start; padding:40px;
+      transform:translateX(100%); transition:transform .3s; border-left:1px solid var(--border);
+    }
+    nav ul.open{transform:translateX(0);}
+    .nav-toggle{display:flex;}
+    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    section{padding:90px 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="dot"></span>VQ<span style="color:var(--text-dim)">.dev</span></div>
+  <nav>
+    <ul id="navList">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#first-year">First Year</a></li>
+      <li><a href="#second-year">Second Year</a></li>
+      <li><a href="#third-year">Third Year</a></li>
+      <li><a href="#fourth-year">Fourth Year</a></li>
+      <li><a href="#resume">Resume</a></li>
+    </ul>
+  </nav>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">Bachelor of Science in Information Technology</div>
+      <h1>Vince Francis B. Quita<span class="cursor"></span></h1>
+      <div class="quote">Every line of code is a step toward innovation.</div>
+      <p class="lede">As an Information Technology student, I am passionate about learning, solving problems, and creating meaningful solutions through technology. This portfolio reflects my journey, skills, and dedication to continuous growth as I strive to become a skilled and innovative IT professional.</p>
+      <div class="hero-actions">
+        <a href="#first-year" class="btn btn-primary">View my journey</a>
+        <a href="#resume" class="btn btn-ghost">See resume</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="titlebar"><span></span><span></span><span></span></div>
+      <div class="card-body">
+        <strong>Vince Francis B. Quita</strong>
+        <div class="row"><span class="k">School</span><span>Davao del Norte State College</span></div>
+        <div class="row"><span class="k">Program</span><span>BS Information Technology</span></div>
+        <div class="row"><span class="k">Address</span><span>Prk 2 Brgy. Quezon, Panabo City</span></div>
+        <div class="row"><span class="k">Mobile</span><span>0912 060 3825</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">01 · About</div>
+      <h2>About me</h2>
+    </div>
+  </div>
+  <div class="about-grid">
+    <div class="quote-card">
+      <p>Every line of code is a step toward innovation.</p>
+    </div>
+    <div>
+      <div class="value-card">
+        <h4>Continuous growth</h4>
+        <p>Passionate about learning, solving problems, and creating meaningful solutions through technology.</p>
+      </div>
+      <div class="value-card">
+        <h4>My journey</h4>
+        <p>This portfolio reflects my journey, skills, and dedication as I strive to become a skilled and innovative IT professional.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">02 · Academic Journey</div>
+      <h2>Year by year</h2>
+    </div>
+    <p>Content for each year is on Vince's site but couldn't be pulled automatically — placeholders below.</p>
+  </div>
+  <div class="year-grid">
+    <div class="year-card" id="first-year">
+      <div class="yr-tag">Year 01</div>
+      <h4>First Year</h4>
+      <p>// content pending</p>
+    </div>
+    <div class="year-card" id="second-year">
+      <div class="yr-tag">Year 02</div>
+      <h4>Second Year</h4>
+      <p>// content pending</p>
+    </div>
+    <div class="year-card" id="third-year">
+      <div class="yr-tag">Year 03</div>
+      <h4>Third Year</h4>
+      <p>// content pending</p>
+    </div>
+    <div class="year-card" id="fourth-year">
+      <div class="yr-tag">Year 04</div>
+      <h4>Fourth Year</h4>
+      <p>// content pending</p>
+    </div>
+  </div>
+</section>
+
+<section class="reveal" id="resume">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">03 · Resume</div>
+      <h2>Resume</h2>
+    </div>
+    <p>Resume page content pending — send it over and I'll drop it in.</p>
+  </div>
+  <div class="value-card">
+    <h4>// content pending</h4>
+    <p>Paste your resume details (education, skills, experience) and I'll build this section to match.</p>
+  </div>
+</section>
+
+<section class="reveal" id="contact">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">04 · Contact</div>
+      <h2>Get in touch</h2>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="ci-row"><div class="k">Email</div><div class="v">quita.vincefrancis@dnsc.edu.ph</div></div>
+      <div class="ci-row"><div class="k">Mobile</div><div class="v">0912 060 3825</div></div>
+      <div class="ci-row"><div class="k">Facebook</div><div class="v">Vince Francis Quita</div></div>
+      <div class="ci-row"><div class="k">LinkedIn</div><div class="v">Vince Quita</div></div>
+      <div class="ci-row"><div class="k">Address</div><div class="v">Prk 2 Brgy. Quezon, Panabo City</div></div>
+    </div>
+    <div class="contact-info">
+      <div class="ci-row"><div class="k">Connect</div></div>
+      <div class="social-row">
+        <a href="#" target="_blank">Twitter ↗</a>
+        <a href="#" target="_blank">LinkedIn ↗</a>
+        <a href="#" target="_blank">Instagram ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Vince Francis B. Quita — BS Information Technology, DNSC.</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  reveals.forEach(r => io.observe(r));
+</script>
+
+</body>
+</html>
