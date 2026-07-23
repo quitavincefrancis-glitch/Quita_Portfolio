@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vince Francis B. Quita — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0c;
+    --bg-elev:#131316;
+    --bg-elev-2:#1a1a1e;
+    --border:#242429;
+    --text:#ececec;
+    --text-dim:#8c8c94;
+    --text-faint:#5a5a61;
+    --accent:#e8b04b;
+    --accent-2:#5eb8ff;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --display: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:var(--sans); line-height:1.6; overflow-x:hidden;}
+  body::before{
+    content:""; position:fixed; inset:0;
+    background-image:linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px; opacity:.15; pointer-events:none; z-index:0;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  section{position:relative; z-index:1; padding:120px 8vw; max-width:1200px; margin:0 auto;}
+  .eyebrow{font-family:var(--mono); font-size:.8rem; color:var(--accent); letter-spacing:.02em; margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:"//"; color:var(--text-faint);}
+  h1,h2,h3,h4{font-family:var(--display); font-weight:600; letter-spacing:-.01em;}
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:22px 8vw; background:rgba(10,10,12,.75); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:var(--mono); font-weight:500; font-size:1.05rem; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent);}
+  nav ul{list-style:none; display:flex; gap:36px;}
+  nav a{font-family:var(--mono); font-size:.85rem; color:var(--text-dim); transition:color .2s; position:relative;}
+  nav a:hover{color:var(--text);}
+  nav a::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:1px; background:var(--accent); transition:width .25s;}
+  nav a:hover::after{width:100%;}
+  .nav-toggle{display:none; flex-direction:column; gap:5px; cursor:pointer; z-index:110;}
+  .nav-toggle span{width:24px; height:2px; background:var(--text);}
+
+  .hero{min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding-top:140px;}
+  .hero-grid{display:grid; grid-template-columns:1.3fr .7fr; gap:60px; align-items:center;}
+  .hero-tag{font-family:var(--mono); font-size:.85rem; color:var(--text-dim); letter-spacing:.03em; margin-bottom:22px; text-transform:uppercase;}
+  .hero h1{font-size:clamp(2.2rem, 4.4vw, 3.6rem); line-height:1.15; color:var(--text);}
+  .hero h1 .cursor{display:inline-block; width:.5em; height:1em; background:var(--accent); animation:blink 1s steps(2) infinite; vertical-align:-.12em; margin-left:4px;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero p.lede{margin-top:26px; max-width:560px; color:var(--text-dim); font-size:1.05rem;}
+  .hero .quote{font-family:var(--mono); font-size:.9rem; color:var(--accent-2); border-left:2px solid var(--accent-2); padding-left:14px; margin-top:22px;}
+  .hero-actions{display:flex; gap:16px; margin-top:40px; flex-wrap:wrap;}
+  .btn{font-family:var(--mono); font-size:.85rem; padding:14px 26px; border-radius:4px; transition:all .2s; border:1px solid transparent; cursor:pointer;}
+  .btn-primary{background:var(--accent); color:#0a0a0c; font-weight:500;}
+  .btn-primary:hover{background:#f2c46a; transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+
+  .hero-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; overflow:hidden;}
+  .hero-card .titlebar{display:flex; gap:6px; padding:12px 14px; border-bottom:1px solid var(--border);}
+  .titlebar span{width:10px; height:10px; border-radius:50%;}
+  .titlebar span:nth-child(1){background:#ff5f57;}
+  .titlebar span:nth-child(2){background:#febc2e;}
+  .titlebar span:nth-child(3){background:#28c840;}
+  .hero-card .card-body{padding:22px; font-family:var(--mono); font-size:.8rem; color:var(--text-dim);}
+  .hero-card .card-body strong{color:var(--text); display:block; font-family:var(--display); font-size:1.1rem; margin-bottom:10px;}
+  .hero-card .card-body .row{margin-bottom:10px; display:flex; gap:8px;}
+  .hero-card .card-body .row .k{color:var(--text-faint); min-width:70px;}
+
+  .stat-strip{display:flex; gap:0; margin-top:60px; border-top:1px solid var(--border); padding-top:26px;}
+  .stat-strip div{flex:1; border-left:1px solid var(--border); padding-left:20px;}
+  .stat-strip div:first-child{border-left:none; padding-left:0;}
+  .stat-num{font-family:var(--display); font-size:1.8rem; color:var(--accent);}
+  .stat-label{font-family:var(--mono); font-size:.75rem; color:var(--text-dim); margin-top:2px;}
+
+  .sec-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; gap:24px; flex-wrap:wrap;}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.3rem);}
+  .sec-head p{color:var(--text-dim); max-width:420px; font-size:.95rem;}
+
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+  .about-grid p{color:var(--text-dim); margin-bottom:18px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .pill{font-family:var(--mono); font-size:.75rem; padding:8px 14px; border:1px solid var(--border); border-radius:20px; color:var(--text-dim);}
+  .value-cards{display:flex; flex-direction:column; gap:16px;}
+  .value-card{background:var(--bg-elev); border:1px solid var(--border); border-radius:8px; padding:22px; border-left:2px solid var(--accent);}
+  .value-card h4{font-size:1rem; margin-bottom:6px;}
+  .value-card p{color:var(--text-dim); font-size:.9rem; margin:0;}
+
+  .resume-wrap{display:grid; grid-template-columns:.9fr 1.1fr; gap:50px;}
+  .resume-highlight{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; padding:34px;}
+  .resume-highlight h3{margin-bottom:14px; font-size:1.3rem;}
+  .resume-highlight p{color:var(--text-dim); margin-bottom:22px; font-size:.92rem;}
+  .hl-item{display:flex; gap:14px; margin-bottom:16px;}
+  .hl-item .idx{font-family:var(--mono); color:var(--accent); font-size:.85rem; width:28px;}
+  .hl-item strong{display:block; font-size:.92rem;}
+  .hl-item span{color:var(--text-dim); font-size:.85rem;}
+  .tools-row{display:flex; flex-wrap:wrap; gap:8px; margin-top:20px;}
+  .tag{font-family:var(--mono); font-size:.68rem; color:var(--accent-2); background:rgba(94,184,255,.08); padding:4px 9px; border-radius:4px;}
+  .timeline{border-left:1px solid var(--border); padding-left:28px; display:flex; flex-direction:column; gap:36px;}
+  .timeline-item{position:relative;}
+  .timeline-item::before{content:""; position:absolute; left:-33px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--bg); border:2px solid var(--accent);}
+  .timeline-item .period{font-family:var(--mono); font-size:.75rem; color:var(--text-faint); margin-bottom:6px;}
+  .timeline-item h4{font-size:1.05rem; margin-bottom:4px;}
+  .timeline-item span{color:var(--text-dim); font-size:.88rem;}
+
+  .project-grid, .cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:24px;}
+  .project-card, .cert-card{background:var(--bg-elev); border:1px dashed var(--border); border-radius:10px; overflow:hidden; transition:border-color .25s;}
+  .project-card:hover, .cert-card:hover{border-color:var(--accent-2);}
+  .project-card .titlebar{background:var(--bg-elev-2); border-style:solid;}
+  .placeholder-thumb{
+    aspect-ratio:16/10; display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-size:.75rem; color:var(--text-faint); background:var(--bg-elev-2);
+  }
+  .cert-card .placeholder-thumb{aspect-ratio:4/3;}
+  .pc-body{padding:20px;}
+  .pc-body h3, .pc-body h4{font-size:1rem; margin-bottom:8px; color:var(--text-faint);}
+  .pc-body p{color:var(--text-faint); font-size:.85rem; font-family:var(--mono);}
+
+  .contact-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:50px;}
+  .field{margin-bottom:18px;}
+  .field label{font-family:var(--mono); font-size:.75rem; color:var(--text-dim); display:block; margin-bottom:8px;}
+  .field input, .field textarea{width:100%; background:var(--bg-elev); border:1px solid var(--border); border-radius:6px; padding:13px 14px; color:var(--text); font-family:var(--sans); font-size:.92rem;}
+  .field input:focus, .field textarea:focus{outline:none; border-color:var(--accent);}
+  .contact-info{background:var(--bg-elev); border:1px solid var(--border); border-radius:10px; padding:32px;}
+  .ci-row{display:flex; gap:14px; margin-bottom:22px;}
+  .ci-row .k{font-family:var(--mono); font-size:.72rem; color:var(--text-faint); text-transform:uppercase; margin-bottom:4px;}
+  .ci-row .v{font-size:.92rem;}
+  .social-row{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap;}
+  .social-row a{font-family:var(--mono); font-size:.78rem; border:1px solid var(--border); padding:10px 16px; border-radius:6px; transition:.2s;}
+  .social-row a:hover{border-color:var(--accent-2); color:var(--accent-2);}
+
+  footer{text-align:center; padding:40px 8vw; border-top:1px solid var(--border); font-family:var(--mono); font-size:.78rem; color:var(--text-faint); position:relative; z-index:1;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media(max-width:860px){
+    nav ul{position:fixed; top:0; right:0; height:100vh; width:70vw; background:var(--bg-elev); flex-direction:column; justify-content:center; align-items:flex-start; padding:40px; transform:translateX(100%); transition:transform .3s; border-left:1px solid var(--border);}
+    nav ul.open{transform:translateX(0);}
+    .nav-toggle{display:flex;}
+    .hero-grid, .about-grid, .resume-wrap, .contact-grid{grid-template-columns:1fr;}
+    .stat-strip{flex-direction:column; gap:16px;}
+    .stat-strip div{border-left:none; padding-left:0; border-top:1px solid var(--border); padding-top:16px;}
+    .stat-strip div:first-child{border-top:none; padding-top:0;}
+    section{padding:90px 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><span class="dot"></span>VQ<span style="color:var(--text-dim)">.dev</span></div>
+  <nav>
+    <ul id="navList">
+      <li><a href="#about">About</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-tag">Bachelor of Science in Information Technology</div>
+      <h1>Every line of code is a step toward innovation<span class="cursor"></span></h1>
+      <p class="lede">As an Information Technology student, I am passionate about learning, solving problems, and creating meaningful solutions through technology.</p>
+      <div class="quote">This portfolio reflects my journey, skills, and dedication to continuous growth as I strive to become a skilled and innovative IT professional.</div>
+      <div class="hero-actions">
+        <a href="#about" class="btn btn-primary">Learn more</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+      <div class="stat-strip">
+        <div><div class="stat-num">--</div><div class="stat-label">Projects (add yours)</div></div>
+        <div><div class="stat-num">--</div><div class="stat-label">Certificates (add yours)</div></div>
+        <div><div class="stat-num">02026</div><div class="stat-label">Est. graduation</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="titlebar"><span></span><span></span><span></span></div>
+      <div class="card-body">
+        <strong>Vince Francis B. Quita</strong>
+        <div class="row"><span class="k">School</span><span>Davao del Norte State College</span></div>
+        <div class="row"><span class="k">Program</span><span>BS Information Technology</span></div>
+        <div class="row"><span class="k">Address</span><span>Prk 2 Brgy. Quezon, Panabo City</span></div>
+        <div class="row"><span class="k">Mobile</span><span>0912 060 3825</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">01 · About</div>
+      <h2>About me</h2>
+    </div>
+    <p>As an Information Technology student, I am passionate about learning, solving problems, and creating meaningful solutions through technology.</p>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p>This portfolio reflects my journey, skills, and dedication to continuous growth as I strive to become a skilled and innovative IT professional.</p>
+      <p>"Every line of code is a step toward innovation" — a mindset I carry into every system I build and every problem I take on.</p>
+      <div class="pill-row">
+        <span class="pill">Information Technology</span>
+        <span class="pill">Problem Solving</span>
+        <span class="pill">Continuous Learning</span>
+      </div>
+    </div>
+    <div class="value-cards">
+      <div class="value-card">
+        <h4>Curious by nature</h4>
+        <p>Always learning new tools, languages, and ways of thinking through problems.</p>
+      </div>
+      <div class="value-card">
+        <h4>Solutions-focused</h4>
+        <p>Drawn to building things that solve real, meaningful problems.</p>
+      </div>
+      <div class="value-card">
+        <h4>Growth-minded</h4>
+        <p>Committed to becoming a skilled, innovative IT professional over time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resume" class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">02 · Resume</div>
+      <h2>A crisp, easy-to-scan overview</h2>
+    </div>
+    <p>// send your full resume details and I'll complete this section</p>
+  </div>
+  <div class="resume-wrap">
+    <div class="resume-highlight">
+      <h3>Building toward an IT career</h3>
+      <p>Education, skills, and tools go here — send your resume content and I'll structure it to match this layout exactly.</p>
+      <div class="hl-item"><span class="idx">01</span><div><strong>// pending</strong><span>Add a resume highlight</span></div></div>
+      <div class="hl-item"><span class="idx">02</span><div><strong>// pending</strong><span>Add a resume highlight</span></div></div>
+      <div class="hl-item"><span class="idx">03</span><div><strong>// pending</strong><span>Add a resume highlight</span></div></div>
+      <div class="tools-row">
+        <span class="tag">// skills pending</span>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="period">2023 — Present</div>
+        <h4>Bachelor of Science in Information Technology</h4>
+        <span>Davao del Norte State College</span>
+      </div>
+      <div class="timeline-item">
+        <div class="period">// pending</div>
+        <h4>Senior High School</h4>
+        <span>Add your senior high details</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">03 · Projects</div>
+      <h2>Featured projects</h2>
+    </div>
+    <p>// send project names, descriptions, and screenshots to fill this in</p>
+  </div>
+  <div class="project-grid">
+    <div class="project-card">
+      <div class="titlebar"><span></span><span></span><span></span></div>
+      <div class="placeholder-thumb">// screenshot pending</div>
+      <div class="pc-body"><h3>Project title pending</h3><p>Add a description of this project.</p></div>
+    </div>
+    <div class="project-card">
+      <div class="titlebar"><span></span><span></span><span></span></div>
+      <div class="placeholder-thumb">// screenshot pending</div>
+      <div class="pc-body"><h3>Project title pending</h3><p>Add a description of this project.</p></div>
+    </div>
+    <div class="project-card">
+      <div class="titlebar"><span></span><span></span><span></span></div>
+      <div class="placeholder-thumb">// screenshot pending</div>
+      <div class="pc-body"><h3>Project title pending</h3><p>Add a description of this project.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="certificates" class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">04 · Certificate Vault</div>
+      <h2>Certificate vault</h2>
+    </div>
+    <p>// send certificate images and titles to fill this in</p>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card"><div class="placeholder-thumb">// certificate pending</div><div class="pc-body"><h4>Certificate title pending</h4><p>Add certificate details.</p></div></div>
+    <div class="cert-card"><div class="placeholder-thumb">// certificate pending</div><div class="pc-body"><h4>Certificate title pending</h4><p>Add certificate details.</p></div></div>
+    <div class="cert-card"><div class="placeholder-thumb">// certificate pending</div><div class="pc-body"><h4>Certificate title pending</h4><p>Add certificate details.</p></div></div>
+  </div>
+</section>
+
+<section id="contact" class="reveal">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">05 · Contact</div>
+      <h2>Send a message</h2>
+    </div>
+    <p>Send your details and I will respond as soon as possible.</p>
+  </div>
+  <div class="contact-grid">
+    <form onsubmit="return false;">
+      <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+      <div class="field"><label>Subject</label><input type="text" placeholder="Subject"></div>
+      <div class="field"><label>Message</label><textarea rows="5" placeholder="Your message"></textarea></div>
+      <button class="btn btn-primary" type="submit">Send message</button>
+    </form>
+    <div class="contact-info">
+      <div class="ci-row"><div><div class="k">Email</div><div class="v">quita.vincefrancis@dnsc.edu.ph</div></div></div>
+      <div class="ci-row"><div><div class="k">Mobile</div><div class="v">0912 060 3825</div></div></div>
+      <div class="ci-row"><div><div class="k">Facebook</div><div class="v">Vince Francis Quita</div></div></div>
+      <div class="ci-row"><div><div class="k">Location</div><div class="v">Prk 2 Brgy. Quezon, Panabo City</div></div></div>
+      <div class="social-row">
+        <a href="#" target="_blank">LinkedIn ↗</a>
+        <a href="#" target="_blank">Twitter ↗</a>
+        <a href="#" target="_blank">Instagram ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Vince Francis B. Quita — BS Information Technology, DNSC.</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  navToggle.addEventListener('click', () => navList.classList.toggle('open'));
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navList.classList.remove('open')));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  reveals.forEach(r => io.observe(r));
+</script>
+
+</body>
+</html>
